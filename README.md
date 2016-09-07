@@ -32,4 +32,4 @@ $('a').checkExternalLinks({
 6. Add Gulp task documentation
 7. Add the date of generation of the script at the top of the javascript file
 8. Add the package version from package.json to the top of the javascript file
-9. Implement js statistics (suck as size and gzipped size)
+9. Implement js statistics (such as size and gzipped size)
