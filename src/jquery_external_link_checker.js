@@ -69,7 +69,9 @@
      Provide local access to the DOM node(s) that called the plugin,
      as well local access to the plugin name and default options.
    */
-    this.$element = element;
+    var _self = this;
+
+    _self.$element = element;
 
     /*
       jQuery has an extend method which merges the contents of two or
@@ -79,9 +81,9 @@
 
       More at: http://api.jquery.com/jquery.extend/
     */
-    this.settings = $.extend(defaults, options);
-    this._defaults = defaults;
-    this._name = pluginName;
+    _self.settings = $.extend(defaults, options);
+    _self._defaults = defaults;
+    _self._name = pluginName;
 
     /*
       The 'init' method is the starting point for all plugin logic.
@@ -93,7 +95,7 @@
       each instance can inherit the methods from the constructor
       function's prototype.
     */
-    this.init();
+    _self.init();
   }
 
   // Avoid Plugin.prototype conflicts
@@ -105,11 +107,11 @@
         Place initialization logic here
         Note that here you already have acccess to the DOM node(s), plugin name,
         default plugin options and custom plugin options for a each instance
-        of the plugin by using the variables 'this.$element',
-        'this._name', 'this._defaults' and 'this.options' created in
+        of the plugin by using the variables '_self.$element',
+        '_self._name', '_self._defaults' and '_self.options' created in
         the 'Plugin' constructor function.
 
-        Calling function: this.myFunction(arg1, arg2), this.buildCache();
+        Calling function: _self.myFunction(arg1, arg2), _self.buildCache();
       */
       var _self = this;
 
@@ -147,7 +149,7 @@
       _self.c_windowLocationHost = _self.c_windowLocation.host;
 
       // Plugin utility cache variables
-      _self.c_currentHref = $(this.$element).attr('href').toString();
+      _self.c_currentHref = $(_self.$element).attr('href').toString();
     },
     utilityParseLink: function(href) {
       /*
@@ -174,8 +176,10 @@
           Consequently, the destroy method can be called using:
           $('selector').data('plugin_myPluginName').destroy();
       */
-      this.unbindEvents();
-      this.$element.removeData();
+      var _self = this;
+
+      _self.unbindEvents();
+      _self.$element.removeData();
     }
   });
 

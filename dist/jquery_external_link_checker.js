@@ -39,13 +39,15 @@
     };
 
   function Plugin(element, options) {
-    this.$element = element;
+    var _self = this;
 
-    this.settings = $.extend(defaults, options);
-    this._defaults = defaults;
-    this._name = pluginName;
+    _self.$element = element;
 
-    this.init();
+    _self.settings = $.extend(defaults, options);
+    _self._defaults = defaults;
+    _self._name = pluginName;
+
+    _self.init();
   }
 
   $.extend(Plugin.prototype, {
@@ -75,7 +77,7 @@
       _self.c_windowLocation = _self.c_window.location;
       _self.c_windowLocationHost = _self.c_windowLocation.host;
 
-      _self.c_currentHref = $(this.$element).attr('href').toString();
+      _self.c_currentHref = $(_self.$element).attr('href').toString();
     },
     utilityParseLink: function(href) {
       var parser = document.createElement('a');
@@ -84,8 +86,10 @@
       return parser.host;
     },
     destroy: function() {
-      this.unbindEvents();
-      this.$element.removeData();
+      var _self = this;
+
+      _self.unbindEvents();
+      _self.$element.removeData();
     }
   });
 
