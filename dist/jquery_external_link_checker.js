@@ -122,9 +122,9 @@
         Calling function: this.myFunction(arg1, arg2), this.buildCache();
       */
       var _self = this;
-      this.utilityCacheVariables();
+      _self.utilityCacheVariables();
 
-      this.checkLinks();
+      _self.checkLinks();
     },
 
     checkLinks: function() {
@@ -146,17 +146,15 @@
 
         Note:
           1. All variables that begin with 'c_' are cache variables
-          2. You can access them in other methods like that '_self.c_window'
-            or '_self.c_windowLocationHostname'
+          2. You can access them in other methods like that '_self.c_windowLocationHost'
+            or '_self.c_windowLocation'
       */
       var _self = this;
 
       // Window Cache Variables
       _self.c_window = window;
       _self.c_windowLocation = _self.c_window.location;
-      _self.c_windowLocationHref = _self.c_windowLocation.href;
       _self.c_windowLocationHost = _self.c_windowLocation.host;
-      _self.c_windowLocationHostname = _self.c_windowLocation.hostname;
 
       // Plugin utility cache variables
       _self.c_currentHref = $(this.$element).attr('href').toString();
@@ -165,7 +163,6 @@
       /*
         Big round of applause to: https://gist.github.com/jlong/2428561
       */
-      var _self = this;
 
       var parser = document.createElement('a');
       parser.href = href;

@@ -24,10 +24,12 @@ $('a').checkExternalLinks({
 | externalLinkClass | String | This options overrides the default "js-external-link" class on external links |
 | internalLinkClass | String | This options overrides the default "js-internal-link" class on internal links
 ### Todo:
-1. Add documentation in /documentation
-2. Add Unit tests
-3. Add CommonJS documentation and tests
-4. Add AMD documentation and tests
-5. Add Gulp task documentation
-6. Add the date of generation of the script at the top of the javascript file
-7. Add the package version from package.json to the top of the javascript file
+1. Fix the `gulp scripts-min` task because it doesn't work on `gulp watch`
+2. Add documentation in /documentation
+3. Add Unit tests
+4. Add CommonJS documentation and tests
+5. Add AMD documentation and tests
+6. Add Gulp task documentation
+7. Add the date of generation of the script at the top of the javascript file
+8. Add the package version from package.json to the top of the javascript file
+9. Implement js statistics (suck as size and gzipped size)
