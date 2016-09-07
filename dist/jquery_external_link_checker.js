@@ -32,7 +32,6 @@
   'use strict';
 
 
-
   var pluginName = 'checkExternalLinks',
     defaults = {
       externalLinkClass: 'js-external-link',
@@ -53,8 +52,8 @@
 
     init: function() {
       var _self = this;
-      _self.utilityCacheVariables();
 
+      _self.utilityCacheVariables();
       _self.checkLinks();
     },
 
@@ -79,7 +78,6 @@
       _self.c_currentHref = $(this.$element).attr('href').toString();
     },
     utilityParseLink: function(href) {
-
       var parser = document.createElement('a');
       parser.href = href;
 

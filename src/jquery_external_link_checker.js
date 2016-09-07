@@ -41,7 +41,6 @@
 }(function($) {
 
   'use strict';
-
   // undefined is used here as the undefined global variable in ECMAScript 3 is
   // mutable (ie. it can be changed by someone else). undefined isn't really being
   // passed in so we can ensure the value of it is truly undefined. In ES5, undefined
@@ -113,8 +112,8 @@
         Calling function: this.myFunction(arg1, arg2), this.buildCache();
       */
       var _self = this;
-      _self.utilityCacheVariables();
 
+      _self.utilityCacheVariables();
       _self.checkLinks();
     },
 
@@ -154,7 +153,6 @@
       /*
         Big round of applause to: https://gist.github.com/jlong/2428561
       */
-
       var parser = document.createElement('a');
       parser.href = href;
 
