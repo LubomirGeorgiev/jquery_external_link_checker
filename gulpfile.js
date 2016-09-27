@@ -1,15 +1,11 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    strip_comments = require('gulp-strip-comments');
+    rename = require('gulp-rename');
 
 gulp.task('scripts', function() {
   gulp.src(['./src/**/*.js'])
     .pipe(concat('jquery_external_link_checker.js'))
-    .pipe(strip_comments({
-      safe: true
-    }))
     .pipe(gulp.dest('dist'))
 });
 

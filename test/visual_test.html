@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jquery_external_link_checker</title>
+
+  <style>
+    a {
+      color: #fff;
+    }
+
+    .js-internal-link {
+      background: green;
+    }
+
+    .js-external-link {
+      background: red;
+    }
+  </style>
+
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../dist/jquery_external_link_checker.js"></script>
+  <script>
+    $(document).ready(function() {
+
+      $('.internalLinkList li a').each(function() {
+        var _self = $(this);
+        var href = _self.attr('href');
+        var windowHref = window.location.href;
+
+        var replace = href.replace(/{currentUrl}/g, windowHref);
+
+        _self.attr('href', replace);
+        var getNewHref = _self.attr('href');
+        _self.text(getNewHref);
+      });
+
+      $('a').checkExternalLinks();
+
+    });
+  </script>
+</head>
+
+<body>
+
+  <h1>Plugin Test</h1>
+
+  <h3>These should all be green</h2>
+  <ul class="internalLinkList">
+    <li><a href="{currentUrl}pathname/?search=test#hash">{currentUrl}/pathname/?search=test#hash</a></li>
+    <li><a href="{currentUrl}">{currentUrl}</a></li>
+  </ul>
+
+  <h3>These should all be red</h2>
+  <ul class="externalLinkList">
+    <li><a href="http://google.com/">http://google.com/</a></li>
+    <li><a href="http://youtube.com/">http://youtube.com/</a></li>
+    <li><a href="http://example.com:3000/pathname/?search=test#hash">http://example.com:3000/pathname/?search=test#hash</a></li>
+  </ul>
+
+</body>
+</html>

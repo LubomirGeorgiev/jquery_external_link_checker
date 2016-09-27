@@ -1,20 +1,7 @@
 {
-  "name": "jquery-plugin",
-  "private": true,
+  "name": "jquery_external_link_checker",
+  "description": "A simple and minimalistic jQuery plugin for putting a class on external links.",
   "dependencies": {
-    "bootstrap-sass": "~3.3.5",
-    "modernizr": "~2.8.1"
-  },
-  "overrides": {
-    "bootstrap-sass": {
-      "main": [
-        "dist/jquery_external_link_checker.js",
-        "dist/jquery_external_link_checker.min.js",
-      ]
-    }
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "jquery": "^3.1.1"
   }
 }

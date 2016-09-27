@@ -1,4 +1,4 @@
-/*!
+/**!
  *
  * jQuery External Link Checker v1.0.0
  * http://lubomirgeorgiev.github.io/jquery_external_link_checker/
@@ -9,7 +9,7 @@
  * http://lubomirgeorgiev.github.io/jquery_external_link_checker/
  *
  */
-/*
+/**
   The semi-colon before the function invocation is a safety net against
   concatenated scripts and/or other plugins which may not be closed properly.
 */
@@ -41,10 +41,6 @@
 }(function($) {
 
   'use strict';
-  // undefined is used here as the undefined global variable in ECMAScript 3 is
-  // mutable (ie. it can be changed by someone else). undefined isn't really being
-  // passed in so we can ensure the value of it is truly undefined. In ES5, undefined
-  // can no longer be modified.
 
   // window and document are passed through as local variable rather than global
   // as this (slightly) quickens the resolution process and can be more efficiently
@@ -57,23 +53,20 @@
       internalLinkClass: 'js-internal-link'
     };
 
-  /*
-    The 'Plugin' constructor, builds a new instance of the plugin for the
-    DOM node(s) that the plugin is called on. For example,
-    '$('h1').pluginName();' creates a new instance of pluginName for
-    all h1's.
+  /**
+   * The 'Plugin' constructor.
+   * @class
+   * @namespace js-external-link
+   * @public
+   * @param {HTMLElement|jQuery} element
+   * @param {Object} [options] - The options
   */
-  // Create the plugin constructor
   function Plugin(element, options) {
-    /*
-     Provide local access to the DOM node(s) that called the plugin,
-     as well local access to the plugin name and default options.
-   */
     var _self = this;
 
     _self.$element = element;
 
-    /*
+    /**
       jQuery has an extend method which merges the contents of two or
       more objects, storing the result in the first object. The first object
       is generally empty as we don't want to alter the default options for
@@ -85,7 +78,7 @@
     _self._defaults = defaults;
     _self._name = pluginName;
 
-    /*
+    /**
       The 'init' method is the starting point for all plugin logic.
       Calling the init method here in the 'Plugin' constructor function
       allows us to store all methods (including the init method) in the
@@ -101,30 +94,28 @@
   // Avoid Plugin.prototype conflicts
   $.extend(Plugin.prototype, {
 
-    // Initialization logic
+    /**
+     * Initialization logic.
+     * This this method ignites and initializes the whole jQuery plugin
+     * @memberof js-external-link
+    */
     init: function() {
-      /*
-        Place initialization logic here
-        Note that here you already have acccess to the DOM node(s), plugin name,
-        default plugin options and custom plugin options for a each instance
-        of the plugin by using the variables '_self.$element',
-        '_self._name', '_self._defaults' and '_self.options' created in
-        the 'Plugin' constructor function.
-
-        Calling function: _self.myFunction(arg1, arg2), _self.buildCache();
-      */
       var _self = this;
 
-      _self.utilityCacheVariables();
+      _self.utilCacheVariables();
       _self.checkLinks();
     },
 
+    /**
+     * Make the actial link validation and put the corresponding DOM class on the element
+     * @memberof js-external-link
+    */
     checkLinks: function() {
       var _self = this;
 
-      var parseCurrentLink = _self.utilityParseLink(_self.c_currentHref);
+      var parseCurrentLink = _self.utilParseLink(_self.currentHref);
 
-      if(parseCurrentLink === _self.c_windowLocationHost) {
+      if(parseCurrentLink === _self.windowLocationHost) {
         // Internal Link Detected
         $(_self.$element).addClass(_self._defaults.internalLinkClass);
       } else {
@@ -132,37 +123,43 @@
         $(_self.$element).addClass(_self._defaults.externalLinkClass);
       }
     },
-    utilityCacheVariables: function() {
-      /*
-        Cache Variables
 
-        Note:
-          1. All variables that begin with 'c_' are cache variables
-          2. You can access them in other methods like that '_self.c_windowLocationHost'
-            or '_self.c_windowLocation'
-      */
+    /**
+     * [Utility] Cache all of the variables that are going to be used extensively in other methods.
+     * @memberof js-external-link
+    */
+    utilCacheVariables: function() {
       var _self = this;
 
       // Window Cache Variables
-      _self.c_window = window;
-      _self.c_windowLocation = _self.c_window.location;
-      _self.c_windowLocationHost = _self.c_windowLocation.host;
+      _self.window = window;
+      _self.windowLocation = _self.window.location;
+      _self.windowLocationHost = _self.windowLocation.host;
 
-      // Plugin utility cache variables
-      _self.c_currentHref = $(_self.$element).attr('href').toString();
+      // Plugin util cache variables
+      _self.currentHref = $(_self.$element).attr('href').toString();
     },
-    utilityParseLink: function(href) {
-      /*
-        Big round of applause to: https://gist.github.com/jlong/2428561
-      */
+
+    /**
+     * [Utility] Use browser's native url parser to extract the host from the href. <br>
+     * Previously <a href="http://stackoverflow.com/a/21553982">this</a> regex solution was used but there were lots of problems with it. <br>
+     * So then I discovered <a href="https://gist.github.com/jlong/2428561">this</a> hack that allowed browser's native url parser to be used and it just works like charm. <br>
+     * <strong style="font-size: 130%;">Big round of applause to:  <a href="https://gist.github.com/jlong/2428561">https://gist.github.com/jlong/2428561</a></strong>
+     * @memberof js-external-link
+    */
+    utilParseLink: function(href) {
       var parser = document.createElement('a');
       parser.href = href;
 
       return parser.host;
     },
-    // Remove plugin instance completely
+
+    /**
+     * Remove plugin instance completely
+     * @memberof js-external-link
+    */
     destroy: function() {
-      /*
+      /**
           The destroy method unbinds all events for the specific instance
           of the plugin, then removes all plugin data that was stored in
           the plugin instance using jQuery's .removeData method.
@@ -183,7 +180,7 @@
     }
   });
 
-  /*
+  /**
       Create a lightweight plugin wrapper around the 'Plugin' constructor,
       preventing against multiple instantiations.
 
@@ -192,7 +189,7 @@
   $.fn[pluginName] = function(options) {
     return this.each(function() {
       if (!$.data(this, 'plugin_' + pluginName)) {
-        /*
+        /**
           Use '$.data' to save each instance of the plugin in case
           the user wants to modify it. Using '$.data' in this way
           ensures the data is removed when the DOM element(s) are
