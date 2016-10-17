@@ -107,7 +107,7 @@
     },
 
     /**
-     * Make the actial link validation and put the corresponding DOM class on the element
+     * Make the actual link validation and put the corresponding DOM class on the element
      * @memberof js-external-link
     */
     checkLinks: function() {

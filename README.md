@@ -1,4 +1,4 @@
-# jQuery external link checker
+# jQuery External Link Checker
 
 
 ## How to use:
@@ -26,6 +26,9 @@ $('a').checkExternalLinks({
 | externalLinkClass | String | This options overrides the default "js-external-link" class on external links |
 | internalLinkClass | String | This options overrides the default "js-internal-link" class on internal links
 
+### Development Workflow:
+1. `gulp watch` - to watch and regenerate /dist/jquery_external_link_checker.js
+2. `gulp build` - to build /dist/jquery_external_link_checker.js and jquery_external_link_checker.min.js
 
 ### Todo:
 1. Fix the `gulp scripts-min` task because it doesn't work on `gulp watch`
@@ -37,8 +40,3 @@ $('a').checkExternalLinks({
 7. Add the date of generation of the script at the top of the javascript file
 8. Add the package version from package.json to the top of the javascript file
 9. Implement js statistics (such as size and gzipped size)
-
-
-### Development Workflow:
-1. `gulp watch` - to watch and regenerate /dist/jquery_external_link_checker.js
-2. `gulp build` - to build /dist/jquery_external_link_checker.js and jquery_external_link_checker.min.js
